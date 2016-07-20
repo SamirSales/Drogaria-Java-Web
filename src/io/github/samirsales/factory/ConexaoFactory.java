@@ -10,6 +10,7 @@ public class ConexaoFactory {
 	private static final String URL = "jdbc:mysql://localhost/phpmyadmin";
 	
 	public static Connection conectar() throws SQLException{
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		Connection connection = DriverManager.getConnection(URL, USUARIO, SENHA);
 		return connection;
 	}
