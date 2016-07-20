@@ -12,14 +12,21 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
-		<p:dataTable emptyMessage="Nenhum registro encontrado." value="#{MBFabricante.items}" var="item">
-			<p:column headerText="Código">
-				<h:outputText value="#{item.codigo}"/>
-			</p:column>
-			
-			<p:column headerText="Descrição">
-				<h:outputText value="#{item.descricao}"/>
-			</p:column>
-		</p:dataTable>
+		<h:form>
+			<p:dataTable emptyMessage="Nenhum registro encontrado." 
+				value="#{MBFabricante.items}" 
+				var="item"
+				rows="10"
+				paginator="true">
+				
+				<p:column headerText="Código" sortBy="#{item.codigo}" filterBy="#{item.codigo}">
+					<h:outputText value="#{item.codigo}"/>
+				</p:column>
+				
+				<p:column headerText="Descrição" sortBy="#{item.descricao}" filterBy="#{item.descricao}">
+					<h:outputText value="#{item.descricao}"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>
