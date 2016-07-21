@@ -10,6 +10,7 @@ import javax.faces.model.ListDataModel;
 
 import io.github.samirsales.dao.FabricanteDAO;
 import io.github.samirsales.domain.Fabricante;
+import io.github.samirsales.util.JSFUtil;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "MBFabricante")
@@ -45,6 +46,7 @@ public class FabricanteBean {
 			items = new ListDataModel<Fabricante>(arrayList);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
 		}
 	}
 	
@@ -58,8 +60,10 @@ public class FabricanteBean {
 			dao.salvar(fabricante);
 			ArrayList<Fabricante> arrayList = dao.listar();
 			items = new ListDataModel<Fabricante>(arrayList);
+			JSFUtil.adicionarMensagemSucesso("Fabricante salvo com sucesso!");
 		} catch (SQLException e) {
 			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
 		}
 	}
 
