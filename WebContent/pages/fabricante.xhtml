@@ -35,6 +35,10 @@
 						actionListener="#{MBFabricante.prepararExcluir}"
 						oncomplete="PF('digFabExcluir').show();"
 						update=":frmFabExcluir:pnlFabExcluir" />
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{MBFabricante.prepararEditar}"
+						oncomplete="PF('digFabEditar').show();"
+						update=":frmFabEditar:pnlFabEditar" />
 				</p:column>
 
 				<f:facet name="footer">
@@ -85,6 +89,30 @@
 						update=":frmFabListagem:tblFabricantes :msgGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('digFabExcluir').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog widgetVar="digFabEditar" closable="false" draggable="false"
+			resizable="false" modal="true" appendTo="@(body)"
+			header="Fabricante - Editar">
+			<h:form id="frmFabEditar">
+				<h:panelGrid id="pnlFabEditar" columns="2">
+					<h:outputLabel value="Código:" />
+					<h:outputText value="#{MBFabricante.fabricante.codigo}" />
+
+					<h:outputLabel value="Descrição:" />
+					<p:inputText value="#{MBFabricante.fabricante.descricao}" size="30"
+						maxlength="50" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Editar"
+						actionListener="#{MBFabricante.editar}"
+						oncomplete="PF('digFabEditar').hide();"
+						update="frmFabListagem:tblFabricantes :msgGlobal" />
+					<p:commandButton value="Cancelar"
+						onclick="PF('digFabEditar').hide();" />
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
