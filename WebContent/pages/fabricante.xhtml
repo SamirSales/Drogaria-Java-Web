@@ -12,21 +12,50 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
-		<h:form>
-			<p:dataTable emptyMessage="Nenhum registro encontrado." 
-				value="#{MBFabricante.items}" 
-				var="item"
-				rows="10"
-				paginator="true">
-				
-				<p:column headerText="Código" sortBy="#{item.codigo}" filterBy="#{item.codigo}">
-					<h:outputText value="#{item.codigo}"/>
+		<h:form id="frmFabListagem">
+			<p:dataTable id="tblFabricantes" emptyMessage="Nenhum registro encontrado."
+				value="#{MBFabricante.items}" var="item" rows="10" paginator="true">
+				<f:facet name="header">
+					Fabricante - Listagem
+				</f:facet>
+
+				<p:column headerText="Código" sortBy="#{item.codigo}"
+					filterBy="#{item.codigo}">
+					<h:outputText value="#{item.codigo}" />
 				</p:column>
-				
-				<p:column headerText="Descrição" sortBy="#{item.descricao}" filterBy="#{item.descricao}">
-					<h:outputText value="#{item.descricao}"/>
+
+				<p:column headerText="Descrição" sortBy="#{item.descricao}"
+					filterBy="#{item.descricao}">
+					<h:outputText value="#{item.descricao}" />
 				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton value="Novo"
+						actionListener="#{MBFabricante.prepararNovo}"
+						oncomplete="PF('digFabNovo').show();"
+						update=":frmFabNovo:pnlFabNovo" />
+				</f:facet>
 			</p:dataTable>
 		</h:form>
+
+		<p:dialog widgetVar="digFabNovo" closable="false" draggable="false"
+			resizable="false" modal="true" appendTo="@(body)"
+			header="Fabricante - Novo">
+			<h:form id="frmFabNovo">
+				<h:panelGrid id="pnlFabNovo" columns="2">
+					<p:outputLabel value="Descrição:" />
+					<p:inputText size="30" maxlength="50"
+						value="#{MBFabricante.fabricante.descricao}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Gravar"
+						actionListener="#{MBFabricante.novo}" oncomplete="PF('digFabNovo').hide();"
+						update=":frmFabListagem:tblFabricantes" />
+					<p:commandButton value="Cancelar"
+						onclick="PF('digFabNovo').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
 	</ui:define>
 </ui:composition>

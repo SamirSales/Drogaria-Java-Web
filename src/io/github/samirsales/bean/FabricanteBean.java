@@ -16,6 +16,7 @@ import io.github.samirsales.domain.Fabricante;
 @ViewScoped
 public class FabricanteBean {
 	private ListDataModel<Fabricante> items;
+	private Fabricante fabricante;
 
 	public ListDataModel<Fabricante> getItems() {
 		return items;
@@ -24,9 +25,20 @@ public class FabricanteBean {
 	public void setItems(ListDataModel<Fabricante> items) {
 		this.items = items;
 	}
-	
+
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
+	}
+
+	/**
+	 * The action happens when the page is loaded.
+	 */
 	@PostConstruct
-	public void prepararPesquisa(){
+	public void prepararPesquisa() {
 		try {
 			FabricanteDAO dao = new FabricanteDAO();
 			ArrayList<Fabricante> arrayList = dao.listar();
@@ -35,4 +47,20 @@ public class FabricanteBean {
 			e.printStackTrace();
 		}
 	}
+	
+	public void prepararNovo(){
+		fabricante = new Fabricante();
+	}
+
+	public void novo() {
+		try {
+			FabricanteDAO dao = new FabricanteDAO();
+			dao.salvar(fabricante);
+			ArrayList<Fabricante> arrayList = dao.listar();
+			items = new ListDataModel<Fabricante>(arrayList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
