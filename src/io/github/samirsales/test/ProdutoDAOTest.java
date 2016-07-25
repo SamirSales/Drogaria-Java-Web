@@ -1,7 +1,9 @@
 package io.github.samirsales.test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import io.github.samirsales.dao.ProdutoDAO;
@@ -11,6 +13,7 @@ import io.github.samirsales.domain.Produto;
 public class ProdutoDAOTest {
 
 	@Test
+	@Ignore
 	public void salvar() throws SQLException{
 		Produto p = new Produto();
 		p.setDescricao("novalgina com 10 comprimidos");
@@ -24,5 +27,15 @@ public class ProdutoDAOTest {
 		
 		ProdutoDAO dao = new ProdutoDAO();
 		dao.salvar(p);
+	}
+	
+	@Test
+	public void listar() throws SQLException{
+		ProdutoDAO dao = new ProdutoDAO();
+		ArrayList<Produto> produtos = dao.listar();
+		
+		for(Produto produto : produtos){
+			System.out.println(produto.toString());
+		}
 	}
 }

@@ -46,4 +46,9 @@ public class Produto {
 	public void setFabricante(Fabricante fabricante) {
 		this.fabricante = fabricante;
 	}
+	
+	@Override
+	public String toString(){
+		return "cod: "+codigo+" des: "+descricao+" pre: "+preco+" qua: "+quantidade+" codF: "+fabricante.getCodigo().toString();
+	}
 }
