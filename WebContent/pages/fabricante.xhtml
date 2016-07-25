@@ -13,9 +13,11 @@
 
 	<ui:define name="conteudo">
 		<h:form id="frmFabListagem">
-			<p:dataTable id="tblFabricantes"
+			<p:dataTable id="tblFabricantes" widgetVar="tabelaFabricantes"
 				emptyMessage="Nenhum registro encontrado."
-				value="#{MBFabricante.items}" var="item" rows="8" paginator="true">
+				value="#{MBFabricante.items}" var="item"
+				filteredValue="#{MBFabricante.itemsFiltrados}" rows="8"
+				paginator="true">
 				<f:facet name="header">
 					Fabricante - Listagem
 				</f:facet>
@@ -32,13 +34,15 @@
 
 				<p:column headerText="Opções">
 					<p:commandButton icon="ui-icon-trash"
-						actionListener="#{MBFabricante.prepararExcluir}"
 						oncomplete="PF('digFabExcluir').show();"
-						update=":frmFabExcluir:pnlFabExcluir" />
+						update=":frmFabExcluir:pnlFabExcluir" >
+						<f:setPropertyActionListener target="#{MBFabricante.fabricante}" value="#{item}" />	
+					</p:commandButton>
 					<p:commandButton icon="ui-icon-pencil"
-						actionListener="#{MBFabricante.prepararEditar}"
 						oncomplete="PF('digFabEditar').show();"
-						update=":frmFabEditar:pnlFabEditar" />
+						update=":frmFabEditar:pnlFabEditar" >
+						<f:setPropertyActionListener target="#{MBFabricante.fabricante}" value="#{item}" />
+					</p:commandButton>
 				</p:column>
 
 				<f:facet name="footer">
@@ -63,7 +67,7 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="Gravar"
 						actionListener="#{MBFabricante.novo}"
-						oncomplete="PF('digFabNovo').hide();"
+						oncomplete="PF('digFabNovo').hide(); PF('tabelaFabricantes').clearFilters();"
 						update=":frmFabListagem:tblFabricantes :msgGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('digFabNovo').hide();" />
@@ -85,7 +89,7 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="Excluir"
 						actionListener="#{MBFabricante.excluir}"
-						oncomplete="PF('digFabExcluir').hide();"
+						oncomplete="PF('digFabExcluir').hide(); PF('tabelaFabricantes').clearFilters();"
 						update=":frmFabListagem:tblFabricantes :msgGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('digFabExcluir').hide();" />
@@ -109,7 +113,7 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="Editar"
 						actionListener="#{MBFabricante.editar}"
-						oncomplete="PF('digFabEditar').hide();"
+						oncomplete="PF('digFabEditar').hide(); PF('tabelaFabricantes').clearFilters();"
 						update="frmFabListagem:tblFabricantes :msgGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('digFabEditar').hide();" />

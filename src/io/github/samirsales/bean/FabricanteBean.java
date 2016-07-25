@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.model.ListDataModel;
 
 import io.github.samirsales.dao.FabricanteDAO;
 import io.github.samirsales.domain.Fabricante;
@@ -16,14 +15,15 @@ import io.github.samirsales.util.JSFUtil;
 @ManagedBean(name = "MBFabricante")
 @ViewScoped
 public class FabricanteBean {
-	private ListDataModel<Fabricante> items;
+	private ArrayList<Fabricante> items;
+	private ArrayList<Fabricante> itemsFiltrados;
 	private Fabricante fabricante;
 
-	public ListDataModel<Fabricante> getItems() {
+	public ArrayList<Fabricante> getItems() {
 		return items;
 	}
 
-	public void setItems(ListDataModel<Fabricante> items) {
+	public void setItems(ArrayList<Fabricante> items) {
 		this.items = items;
 	}
 
@@ -42,8 +42,7 @@ public class FabricanteBean {
 	public void prepararPesquisa() {
 		try {
 			FabricanteDAO dao = new FabricanteDAO();
-			ArrayList<Fabricante> arrayList = dao.listar();
-			items = new ListDataModel<Fabricante>(arrayList);
+			items = dao.listar();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			JSFUtil.adicionarMensagemErro(e.getMessage());
@@ -58,8 +57,7 @@ public class FabricanteBean {
 		try {
 			FabricanteDAO dao = new FabricanteDAO();
 			dao.salvar(fabricante);
-			ArrayList<Fabricante> arrayList = dao.listar();
-			items = new ListDataModel<Fabricante>(arrayList);
+			items = dao.listar();
 			JSFUtil.adicionarMensagemSucesso("Fabricante salvo com sucesso!");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,16 +65,11 @@ public class FabricanteBean {
 		}
 	}
 
-	public void prepararExcluir() {
-		fabricante = items.getRowData();
-	}
-
 	public void excluir() {
 		try {
 			FabricanteDAO dao = new FabricanteDAO();
 			dao.excluir(fabricante);
-			ArrayList<Fabricante> arrayList = dao.listar();
-			items = new ListDataModel<Fabricante>(arrayList);
+			items = dao.listar();
 			JSFUtil.adicionarMensagemSucesso("Fabricante excluído com sucesso!");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -84,21 +77,24 @@ public class FabricanteBean {
 		}
 	}
 
-	public void prepararEditar() {
-		fabricante = items.getRowData();
-	}
-
 	public void editar() {
 		try {
 			FabricanteDAO dao = new FabricanteDAO();
 			dao.editar(fabricante);
-			ArrayList<Fabricante> arrayList = dao.listar();
-			items = new ListDataModel<Fabricante>(arrayList);
-			JSFUtil.adicionarMensagemSucesso("Fabricante editar com sucesso!");
+			items = dao.listar();
+			JSFUtil.adicionarMensagemSucesso("Fabricante editado com sucesso!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			JSFUtil.adicionarMensagemErro(e.getMessage());
 		}
+	}
+
+	public ArrayList<Fabricante> getItemsFiltrados() {
+		return itemsFiltrados;
+	}
+
+	public void setItemsFiltrados(ArrayList<Fabricante> itemsFiltrados) {
+		this.itemsFiltrados = itemsFiltrados;
 	}
 
 }
