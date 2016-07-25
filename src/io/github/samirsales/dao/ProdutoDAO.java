@@ -68,10 +68,7 @@ public class ProdutoDAO {
 	public void editar(Produto produto) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append("UPDATE drogaria.produto ");
-		sql.append("SET descricao = ? ");
-		sql.append("SET preco = ? ");
-		sql.append("SET quantidade = ? ");
-		sql.append("SET codigo_fabricante = ? ");
+		sql.append("SET descricao = ?, preco = ?, quantidade = ?, codigo_fabricante = ? ");
 		sql.append("WHERE codigo = ? ");
 
 		Connection connection = ConexaoFactory.conectar();
