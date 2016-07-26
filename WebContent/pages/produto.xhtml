@@ -13,31 +13,40 @@
 
 	<ui:define name="conteudo">
 		<h:form id="frmProdListagem">
-			<f:event listener="#{MBProduto.carregarListagem}" type="preRenderView" />
-		
-			<p:dataTable id="tblProdListagem" value="#{MBProduto.items}" var="item"
-				emptyMessage="Nenhum registro encontrado." paginator="true" rows="8">
+			<f:event listener="#{MBProduto.carregarListagem}"
+				type="preRenderView" />
+
+			<p:dataTable id="tblProdListagem" value="#{MBProduto.items}"
+				var="item" emptyMessage="Nenhum registro encontrado."
+				paginator="true" rows="8"
+				filteredValue="#{MBProduto.itemsFiltrados}">
+
 				<f:facet name="header">
-					<h:outputText value="Produto - Listagem"/>
+					<h:outputText value="Produto - Listagem" />
 				</f:facet>
-				
-				<p:column headerText="Cógigo">
-					<h:outputText value="#{item.codigo}"/>
+
+				<p:column headerText="Cógigo" filterBy="#{item.codigo}"
+					sortBy="#{item.codigo}">
+					<h:outputText value="#{item.codigo}" />
 				</p:column>
-				<p:column headerText="Descrição">
-					<h:outputText value="#{item.descricao}"/>
+				<p:column headerText="Descrição" filterBy="#{item.descricao}"
+					sortBy="#{item.descricao}">
+					<h:outputText value="#{item.descricao}" />
 				</p:column>
-				<p:column headerText="Preço">
-					<h:outputText value="#{item.preco}"/>
+				<p:column headerText="Preço" filterBy="#{item.preco}"
+					sortBy="#{item.preco}">
+					<h:outputText value="#{item.preco}" />
 				</p:column>
-				<p:column headerText="Quantidade">
-					<h:outputText value="#{item.quantidade}"/>
+				<p:column headerText="Quantidade" filterBy="#{item.quantidade}"
+					sortBy="#{item.quantidade}">
+					<h:outputText value="#{item.quantidade}" />
 				</p:column>
-				<p:column headerText="Fabricante">
-					<h:outputText value="#{item.fabricante.descricao}"/>
+				<p:column headerText="Fabricante" filterBy="#{item.fabricante.descricao}"
+					sortBy="#{item.fabricante.descricao}">
+					<h:outputText value="#{item.fabricante.descricao}" />
 				</p:column>
-				
-				
+
+
 			</p:dataTable>
 		</h:form>
 	</ui:define>

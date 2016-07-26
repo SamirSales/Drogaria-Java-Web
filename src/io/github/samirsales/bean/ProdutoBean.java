@@ -3,7 +3,6 @@ package io.github.samirsales.bean;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -16,6 +15,7 @@ import io.github.samirsales.util.JSFUtil;
 @ViewScoped
 public class ProdutoBean {
 	private ArrayList<Produto> items;
+	private ArrayList<Produto> itemsFiltrados;
 
 	public ArrayList<Produto> getItems() {
 		return items;
@@ -25,8 +25,15 @@ public class ProdutoBean {
 		this.items = items;
 	}
 
-	public void carregarListagem() {
+	public ArrayList<Produto> getItemsFiltrados() {
+		return itemsFiltrados;
+	}
 
+	public void setItemsFiltrados(ArrayList<Produto> itemsFiltrados) {
+		this.itemsFiltrados = itemsFiltrados;
+	}
+	
+	public void carregarListagem() {
 		try {
 			ProdutoDAO dao = new ProdutoDAO();
 			items = dao.listar();
