@@ -87,6 +87,27 @@ public class ProdutoBean {
 		}
 	}
 	
+	public void prepararEditar(){
+		try {
+			FabricanteDAO fDao = new FabricanteDAO();
+			comboFabricantes = fDao.listar();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
+		}
+	}
+	
+	public void editar(){
+		try {
+			ProdutoDAO dao = new ProdutoDAO();
+			dao.editar(produto);
+			JSFUtil.adicionarMensagemSucesso("Produto editado com sucesso!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
+		}
+	}
+	
 	public void excluir(){
 		try {
 			ProdutoDAO dao = new ProdutoDAO();
