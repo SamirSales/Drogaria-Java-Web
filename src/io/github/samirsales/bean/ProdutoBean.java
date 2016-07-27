@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import io.github.samirsales.dao.FabricanteDAO;
 import io.github.samirsales.dao.ProdutoDAO;
+import io.github.samirsales.domain.Fabricante;
 import io.github.samirsales.domain.Produto;
 import io.github.samirsales.util.JSFUtil;
 
@@ -16,6 +18,10 @@ import io.github.samirsales.util.JSFUtil;
 public class ProdutoBean {
 	private ArrayList<Produto> items;
 	private ArrayList<Produto> itemsFiltrados;
+	
+	private Produto produto;
+	
+	private ArrayList<Fabricante> comboFabricantes;
 
 	public ArrayList<Produto> getItems() {
 		return items;
@@ -33,10 +39,48 @@ public class ProdutoBean {
 		this.itemsFiltrados = itemsFiltrados;
 	}
 	
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+	public ArrayList<Fabricante> getComboFabricantes() {
+		return comboFabricantes;
+	}
+
+	public void setComboFabricantes(ArrayList<Fabricante> comboFabricantes) {
+		this.comboFabricantes = comboFabricantes;
+	}
+	
 	public void carregarListagem() {
 		try {
 			ProdutoDAO dao = new ProdutoDAO();
 			items = dao.listar();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
+		}
+	}
+	
+	public void prepararNovo(){
+		produto = new Produto();
+		try {
+			FabricanteDAO fDao = new FabricanteDAO();
+			comboFabricantes = fDao.listar();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
+		}
+	}
+	
+	public void novo(){
+		try {
+			ProdutoDAO dao = new ProdutoDAO();
+			dao.salvar(produto);
+			JSFUtil.adicionarMensagemSucesso("Produto salvo com sucesso!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			JSFUtil.adicionarMensagemErro(e.getMessage());
