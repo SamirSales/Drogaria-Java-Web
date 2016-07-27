@@ -35,13 +35,15 @@
 				<p:column headerText="Opções">
 					<p:commandButton icon="ui-icon-trash"
 						oncomplete="PF('digFabExcluir').show();"
-						update=":frmFabExcluir:pnlFabExcluir" >
-						<f:setPropertyActionListener target="#{MBFabricante.fabricante}" value="#{item}" />	
+						update=":frmFabExcluir:pnlFabExcluir">
+						<f:setPropertyActionListener target="#{MBFabricante.fabricante}"
+							value="#{item}" />
 					</p:commandButton>
 					<p:commandButton icon="ui-icon-pencil"
 						oncomplete="PF('digFabEditar').show();"
-						update=":frmFabEditar:pnlFabEditar" >
-						<f:setPropertyActionListener target="#{MBFabricante.fabricante}" value="#{item}" />
+						update=":frmFabEditar:pnlFabEditar">
+						<f:setPropertyActionListener target="#{MBFabricante.fabricante}"
+							value="#{item}" />
 					</p:commandButton>
 				</p:column>
 
@@ -59,15 +61,16 @@
 			header="Fabricante - Novo">
 			<h:form id="frmFabNovo">
 				<h:panelGrid id="pnlFabNovo" columns="2">
-					<p:outputLabel value="Descrição:" />
-					<p:inputText size="30" maxlength="50"
-						value="#{MBFabricante.fabricante.descricao}" />
+					<p:outputLabel for="txtDescFabNovo" value="Descrição:" />
+					<p:inputText id="txtDescFabNovo" size="30" maxlength="50"
+						value="#{MBFabricante.fabricante.descricao}" required="true"
+						requiredMessage="O campo descrição é obrigatório." />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2">
 					<p:commandButton value="Gravar"
 						actionListener="#{MBFabricante.novo}"
-						oncomplete="PF('digFabNovo').hide(); PF('tabelaFabricantes').clearFilters();"
+						oncomplete="verificar(xhr, status, args, 'digFabNovo', 'tabelaFabricantes');"
 						update=":frmFabListagem:tblFabricantes :msgGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('digFabNovo').hide();" />
@@ -105,15 +108,16 @@
 					<h:outputLabel value="Código:" />
 					<h:outputText value="#{MBFabricante.fabricante.codigo}" />
 
-					<h:outputLabel value="Descrição:" />
-					<p:inputText value="#{MBFabricante.fabricante.descricao}" size="30"
-						maxlength="50" />
+					<h:outputLabel for="txtDescFabEditar" value="Descrição:" />
+					<p:inputText id="txtDescFabEditar" value="#{MBFabricante.fabricante.descricao}" size="30"
+						maxlength="50" required="true"
+						requiredMessage="O campo descrição é obrigatório."/>
 				</h:panelGrid>
 
 				<h:panelGrid columns="2">
 					<p:commandButton value="Editar"
 						actionListener="#{MBFabricante.editar}"
-						oncomplete="PF('digFabEditar').hide(); PF('tabelaFabricantes').clearFilters();"
+						oncomplete="verificar(xhr, status, args, 'digFabEditar', 'tabelaFabricantes');"
 						update="frmFabListagem:tblFabricantes :msgGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('digFabEditar').hide();" />
