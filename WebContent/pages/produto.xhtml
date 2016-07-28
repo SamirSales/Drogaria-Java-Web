@@ -85,15 +85,20 @@
 					<p:inputText id="txtProdPrecNovo"
 						value="#{MBProduto.produto.preco}" size="10" required="true"
 						requiredMessage="O campo preço é obrigatório."
-						converterMessage="Informe um valor válido para o campo preço.">
+						converterMessage="Informe um valor válido para o campo preço."
+						validatorMessage="Informe um preço entre 0 e 9999,99.">
 						<f:convertNumber pattern="0.00" />
+						<f:validateDoubleRange minimum="0.00" maximum="9999.99" />
 					</p:inputText>
 
 					<p:outputLabel for="txtProdQuanNovo" value="Quantidade:" />
 					<p:inputText id="txtProdQuanNovo"
 						value="#{MBProduto.produto.quantidade}" size="10" required="true"
 						requiredMessage="O campo quantidade é obrigatório."
-						converterMessage="Informe um valor válido para o campo quantidade." />
+						converterMessage="Informe um valor válido para o campo quantidade."
+						validatorMessage="Informe uma quantidade entre 0 e 99.">
+						<f:validateLongRange minimum="0" maximum="99"/>	
+					</p:inputText>
 
 					<p:outputLabel for="selProdFabNovo" value="Fabricante:" />
 					<p:selectOneMenu id="selProdFabNovo"
@@ -163,14 +168,19 @@
 					<p:outputLabel for="txtProdPreEditar" value="Preço:" />
 					<p:inputText id="txtProdPreEditar"
 						value="#{MBProduto.produto.preco}" size="10" required="true"
-						requiredMessage="O campo preço é obrigatório.">
+						requiredMessage="O campo preço é obrigatório."
+						validatorMessage="Informe um preço entre 0 e 9999,99.">
 						<f:convertNumber pattern="0.00" />
+						<f:validateDoubleRange minimum="0.00" maximum="9999.99" />
 					</p:inputText>
 
 					<p:outputLabel for="txtProdQuanEditar" value="Quantidade:" />
 					<p:inputText id="txtProdQuanEditar"
 						value="#{MBProduto.produto.quantidade}" size="10" required="true"
-						requiredMessage="O campo quantidade é obrigatório." />
+						requiredMessage="O campo quantidade é obrigatório."
+						validatorMessage="Informe uma quantidade entre 0 e 99.">
+						<f:validateLongRange minimum="0" maximum="99" />	
+					</p:inputText>
 
 					<p:outputLabel for="selProdFabEditar" value="Fabricante:" />
 					<p:selectOneMenu id="selProdFabEditar"
