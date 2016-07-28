@@ -10,6 +10,10 @@ O objetivo do projeto é prover procedimentos básicos e necessários para quem 
 * Banco de dados MySQL
 * JUnit
 
+## Print screen
+
+![Print](print_tela_de_produtos.png)
+
 ## Sites importantes
 * https://javaserverfaces.java.net/
 * http://primefaces.org/
