@@ -73,7 +73,7 @@
 						oncomplete="verificar(xhr, status, args, 'digFabNovo', 'tabelaFabricantes');"
 						update=":frmFabListagem:tblFabricantes :msgGlobal" />
 					<p:commandButton value="Cancelar"
-						onclick="PF('digFabNovo').hide();" />
+						onclick="PF('digFabNovo').hide();" process="@this" />
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
@@ -121,7 +121,7 @@
 						oncomplete="verificar(xhr, status, args, 'digFabEditar', 'tabelaFabricantes');"
 						update="frmFabListagem:tblFabricantes :msgGlobal" />
 					<p:commandButton value="Cancelar"
-						onclick="PF('digFabEditar').hide();" />
+						onclick="PF('digFabEditar').hide();" process="@this" />
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
