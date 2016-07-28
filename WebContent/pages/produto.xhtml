@@ -33,12 +33,12 @@
 					sortBy="#{item.descricao}">
 					<h:outputText value="#{item.descricao}" />
 				</p:column>
-				<p:column headerText="Preço" filterBy="#{item.preco}"
-					sortBy="#{item.preco}">
-					<h:outputText value="#{item.preco}" />
+				<p:column headerText="Preço" sortBy="#{item.preco}">
+					<h:outputText value="#{item.preco}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
 				</p:column>
-				<p:column headerText="Quantidade" filterBy="#{item.quantidade}"
-					sortBy="#{item.quantidade}">
+				<p:column headerText="Quantidade" sortBy="#{item.quantidade}">
 					<h:outputText value="#{item.quantidade}" />
 				</p:column>
 				<p:column headerText="Fabricante"
@@ -84,7 +84,10 @@
 					<p:outputLabel for="txtProdPrecNovo" value="Preço:" />
 					<p:inputText id="txtProdPrecNovo"
 						value="#{MBProduto.produto.preco}" size="10" required="true"
-						requiredMessage="O campo preço é obrigatório." />
+						requiredMessage="O campo preço é obrigatório."
+						converterMessage="Informe um valor válido para o campo preço.">
+						<f:convertNumber />
+					</p:inputText>
 
 					<p:outputLabel for="txtProdQuanNovo" value="Quantidade:" />
 					<p:inputText id="txtProdQuanNovo"
@@ -107,7 +110,7 @@
 						oncomplete="verificar(xhr, status, args, 'dlgProdNovo', 'tabelaProdListagem');" />
 					<p:commandButton value="Cancelar"
 						oncomplete="PF('dlgProdNovo').hide();" process="@this">
-						<p:resetInput target="pnlProdNovo" />	
+						<p:resetInput target="pnlProdNovo" />
 					</p:commandButton>
 				</h:panelGrid>
 			</h:form>
@@ -181,7 +184,7 @@
 						oncomplete="verificar(xhr, status, args, 'dlgProdEditar', 'tabelaProdListagem');" />
 					<p:commandButton value="Cancelar"
 						oncomplete="PF('dlgProdEditar').hide();" process="@this">
-						<p:resetInput target="pnlProdEditar" />	
+						<p:resetInput target="pnlProdEditar" />
 					</p:commandButton>
 				</h:panelGrid>
 			</h:form>
