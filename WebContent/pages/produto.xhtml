@@ -86,13 +86,14 @@
 						value="#{MBProduto.produto.preco}" size="10" required="true"
 						requiredMessage="O campo preço é obrigatório."
 						converterMessage="Informe um valor válido para o campo preço.">
-						<f:convertNumber />
+						<f:convertNumber pattern="0.00" />
 					</p:inputText>
 
 					<p:outputLabel for="txtProdQuanNovo" value="Quantidade:" />
 					<p:inputText id="txtProdQuanNovo"
 						value="#{MBProduto.produto.quantidade}" size="10" required="true"
-						requiredMessage="O campo quantidade é obrigatório." />
+						requiredMessage="O campo quantidade é obrigatório."
+						converterMessage="Informe um valor válido para o campo quantidade." />
 
 					<p:outputLabel for="selProdFabNovo" value="Fabricante:" />
 					<p:selectOneMenu id="selProdFabNovo"
@@ -128,7 +129,9 @@
 					<h:outputText value="#{MBProduto.produto.descricao}" />
 
 					<p:outputLabel value="Preço:" />
-					<h:outputText value="#{MBProduto.produto.preco}" />
+					<h:outputText value="#{MBProduto.produto.preco}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
 
 					<p:outputLabel value="Quantidade:" />
 					<h:outputText value="#{MBProduto.produto.quantidade}" />
@@ -157,10 +160,12 @@
 						value="#{MBProduto.produto.descricao}" maxlength="50" size="30"
 						required="true" requiredMessage="O campo descrição é obrigatório." />
 
-					<p:outputLabel for="txtProdDescEditar" value="Preço:" />
+					<p:outputLabel for="txtProdPreEditar" value="Preço:" />
 					<p:inputText id="txtProdPreEditar"
 						value="#{MBProduto.produto.preco}" size="10" required="true"
-						requiredMessage="O campo preço é obrigatório." />
+						requiredMessage="O campo preço é obrigatório.">
+						<f:convertNumber pattern="0.00" />
+					</p:inputText>
 
 					<p:outputLabel for="txtProdQuanEditar" value="Quantidade:" />
 					<p:inputText id="txtProdQuanEditar"
